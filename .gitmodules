@@ -1,0 +1,3 @@
+[submodule "CryptoExchange.Net"]
+	path = CryptoExchange.Net
+	url = https://github.com/shigengyu/CryptoExchange.Net.git

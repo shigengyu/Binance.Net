@@ -2474,6 +2474,16 @@
             The data
             </summary>
         </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceStreamKlineData.Event">
+            <summary>
+            The type of the event
+            </summary>
+        </member>
+        <member name="P:Binance.Net.Interfaces.IBinanceStreamKlineData.EventTime">
+            <summary>
+            The time the event happened
+            </summary>
+        </member>
         <member name="T:Binance.Net.Interfaces.IBinanceStreamKline">
             <summary>
             Stream kline data

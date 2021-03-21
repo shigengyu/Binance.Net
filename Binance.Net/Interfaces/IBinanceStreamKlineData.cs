@@ -20,6 +20,16 @@ namespace Binance.Net.Interfaces
         /// The data
         /// </summary>
         IBinanceStreamKline Data { get; set; }
+
+        /// <summary>
+        /// The type of the event
+        /// </summary>
+        string Event { get; set; }
+        
+        /// <summary>
+        /// The time the event happened
+        /// </summary>
+        DateTime EventTime { get; set; }
     }
 
     /// <summary>

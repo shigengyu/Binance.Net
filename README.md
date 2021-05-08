@@ -150,8 +150,6 @@ if(!startResult.Success)
 var socketClient = new BinanceSocketClient();
 
 socketClient.Spot.SubscribeToUserDataUpdates(startResult.Data, 
-	accountUpdate => { // Handle account info update 
-	},
 	orderUpdate => { // Handle order update
 	}, 
 	ocoUpdate => { // Handle oco order update
@@ -169,6 +167,32 @@ When no longer listening to private endpoints the `StopUserStream` method in `Bi
 
 
 ## Release notes
+* Version 6.13.3 - 28 apr 2021
+    * Fixed some issues in the IExchangeClient interface
+    * Updated ExchangeClient.Net
+    * Fixed QueryOCO order id parameter
+
+* Version 6.13.2 - 19 apr 2021
+    * Updated CryptoExchange.Net
+
+* Version 6.13.1 - 02 apr 2021
+    * Fixed mining endpoints
+    * Adjusted TransferSubAccountToSubAccount request
+    * Removed invalid symbol check Usdt futures GetKlines
+
+* Version 6.13.0 - 30 mrt 2021
+    * Added CancelOpenMarginOrders endpoint
+    * Added universal Transfer endpoints
+    * Added new mining endpoints
+    * Updated futures/loan endpoints to V2
+    * Added new subAccount endpoints
+    * Added margin GetInterestRateHistory endpoint
+    * Updated multiple models
+    * Fixed trade rules not applied to Oco orders
+    * Fixed mining endpoints not signed
+    * Fixed quoteQuantity parameter serialization on GetQuote liquid swap endpoint
+    * Fixed GetAssetDetails throwing exception
+
 * Version 6.12.0 - 10 mrt 2021
     * Fixed multiple models
 

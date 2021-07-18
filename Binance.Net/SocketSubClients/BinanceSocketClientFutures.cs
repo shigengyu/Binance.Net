@@ -109,13 +109,18 @@ namespace Binance.Net.SocketSubClients
         public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, KlineInterval interval,
             Action<IBinanceStreamKlineData> onMessage);
 
+
+        /// <inheritdoc />
+        public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, IEnumerable<KlineInterval> intervals,
+            Action<IBinanceStreamKlineData> onMessage);
+
         /// <inheritdoc />
         public abstract CallResult<UpdateSubscription> SubscribeToKlineUpdates(IEnumerable<string> symbols,
             KlineInterval interval, Action<IBinanceStreamKlineData> onMessage);
 
         /// <inheritdoc />
         public abstract Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols,
-            KlineInterval interval, Action<IBinanceStreamKlineData> onMessage);
+            IEnumerable<KlineInterval> intervals, Action<IBinanceStreamKlineData> onMessage);
         
 
         #endregion
@@ -497,7 +502,7 @@ namespace Binance.Net.SocketSubClients
         /// Subscribes to the account update stream. Prior to using this, the BinanceClient.Futures.UserStreams.StartUserStream method should be called.
         /// </summary>
         /// <param name="listenKey">Listen key retrieved by the StartUserStream method</param>
-        /// <param name="onLeverageUpdate">The event handler for leverage changed update</param>
+        /// <param name="onConfigUpdate">The event handler for leverage changed update</param>
         /// <param name="onMarginUpdate">The event handler for whenever a margin has changed</param>
         /// <param name="onAccountUpdate">The event handler for whenever an account update is received</param>
         /// <param name="onOrderUpdate">The event handler for whenever an order status update is received</param>
@@ -505,7 +510,7 @@ namespace Binance.Net.SocketSubClients
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserDataUpdatesAsync(
             string listenKey,
-            Action<BinanceFuturesStreamConfigUpdate>? onLeverageUpdate,
+            Action<BinanceFuturesStreamConfigUpdate>? onConfigUpdate,
             Action<BinanceFuturesStreamMarginUpdate>? onMarginUpdate,
             Action<BinanceFuturesStreamAccountUpdate>? onAccountUpdate,
             Action<BinanceFuturesStreamOrderUpdate>? onOrderUpdate,
@@ -528,7 +533,7 @@ namespace Binance.Net.SocketSubClients
 
                             var result = BaseClient.DeserializeInternal<BinanceFuturesStreamConfigUpdate>(token, false);
                             if (result)
-                                onLeverageUpdate?.Invoke(result.Data);
+                                onConfigUpdate?.Invoke(result.Data);
                             else
                                 Log.Write(LogVerbosity.Warning, "Couldn't deserialize data received from config stream: " + result.Error);
 
